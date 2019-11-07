@@ -1,37 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llorgere <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/02 16:09:42 by llorgere          #+#    #+#             */
-/*   Updated: 2017/05/05 20:23:16 by llorgere         ###   ########.fr       */
+/*   Created: 2017/04/14 18:59:30 by llorgere          #+#    #+#             */
+/*   Updated: 2017/05/05 16:19:26 by llorgere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void const *content)
+char	*ft_strnstr(const char *str, const char *to_find, size_t n)
 {
-	t_list	*tab;
+	size_t	i;
+	size_t	j;
+	char	*tstr;
+	char	*tto_find;
 
-	tab = NULL;
-	if (content == 0)
+	i = 0;
+	tstr = (char *)str;
+	tto_find = (char *)to_find;
+	if (tto_find[i] == '\0')
+		return (tstr);
+	while (tstr[i] != '\0' && i < n)
 	{
-		if (!(tab = (t_list *)malloc(sizeof(*tab) * 1)))
-			return (0);
-		(*tab).content = NULL;
-//		(*tab).content_size = 0;
-		(*tab).next = NULL;
+		j = 0;
+		while (tstr[i + j] == tto_find[j] && (i + j) < n)
+		{
+			j++;
+			if (tto_find[j] == '\0')
+				return (tstr + i);
+		}
+		i++;
 	}
-	else
-	{
-		if (!(tab = (t_list *)malloc(sizeof(*tab) * 1)))
-			return (0);
-		(*tab).content = ft_strdup(content);
-//		(*tab).content_size = content_size;
-		(*tab).next = NULL;
-	}
-	return (tab);
+	return (0);
 }

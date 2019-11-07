@@ -1,37 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llorgere <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/02 16:09:42 by llorgere          #+#    #+#             */
-/*   Updated: 2017/05/05 20:23:16 by llorgere         ###   ########.fr       */
+/*   Created: 2017/05/05 15:12:50 by llorgere          #+#    #+#             */
+/*   Updated: 2017/05/05 15:12:56 by llorgere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void const *content)
+int	ft_tolower(int c)
 {
-	t_list	*tab;
-
-	tab = NULL;
-	if (content == 0)
-	{
-		if (!(tab = (t_list *)malloc(sizeof(*tab) * 1)))
-			return (0);
-		(*tab).content = NULL;
-//		(*tab).content_size = 0;
-		(*tab).next = NULL;
-	}
+	if (c >= 'A' && c <= 'Z')
+		return (c + 32);
 	else
-	{
-		if (!(tab = (t_list *)malloc(sizeof(*tab) * 1)))
-			return (0);
-		(*tab).content = ft_strdup(content);
-//		(*tab).content_size = content_size;
-		(*tab).next = NULL;
-	}
-	return (tab);
+		return (c);
 }

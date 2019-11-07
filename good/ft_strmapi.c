@@ -1,37 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llorgere <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/02 16:09:42 by llorgere          #+#    #+#             */
-/*   Updated: 2017/05/05 20:23:16 by llorgere         ###   ########.fr       */
+/*   Created: 2017/05/05 15:38:05 by llorgere          #+#    #+#             */
+/*   Updated: 2017/05/05 19:25:07 by llorgere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void const *content)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	t_list	*tab;
+	unsigned int	i;
+	char			*tab;
 
-	tab = NULL;
-	if (content == 0)
+	if (!s || !f)
+		return (0);
+	i = 0;
+	while (s[i] != '\0')
+		i++;
+	tab = (char *)malloc(sizeof(char) * (i + 1));
+	if (!tab)
+		return (0);
+	i = 0;
+	while (s[i] != '\0')
 	{
-		if (!(tab = (t_list *)malloc(sizeof(*tab) * 1)))
-			return (0);
-		(*tab).content = NULL;
-//		(*tab).content_size = 0;
-		(*tab).next = NULL;
+		tab[i] = (*f)(i, s[i]);
+		i++;
 	}
-	else
-	{
-		if (!(tab = (t_list *)malloc(sizeof(*tab) * 1)))
-			return (0);
-		(*tab).content = ft_strdup(content);
-//		(*tab).content_size = content_size;
-		(*tab).next = NULL;
-	}
+	tab[i] = '\0';
 	return (tab);
 }

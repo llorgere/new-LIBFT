@@ -1,37 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llorgere <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/02 16:09:42 by llorgere          #+#    #+#             */
-/*   Updated: 2017/05/05 20:23:16 by llorgere         ###   ########.fr       */
+/*   Created: 2017/04/11 18:29:02 by llorgere          #+#    #+#             */
+/*   Updated: 2017/04/14 17:21:56 by llorgere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void const *content)
+char	*ft_strncpy(char *dest, char *src, size_t n)
 {
-	t_list	*tab;
+	size_t	i;
 
-	tab = NULL;
-	if (content == 0)
+	i = 0;
+	while (src[i] != '\0' && n > 0)
 	{
-		if (!(tab = (t_list *)malloc(sizeof(*tab) * 1)))
-			return (0);
-		(*tab).content = NULL;
-//		(*tab).content_size = 0;
-		(*tab).next = NULL;
+		dest[i] = src[i];
+		i++;
+		n--;
 	}
-	else
+	while (n > 0)
 	{
-		if (!(tab = (t_list *)malloc(sizeof(*tab) * 1)))
-			return (0);
-		(*tab).content = ft_strdup(content);
-//		(*tab).content_size = content_size;
-		(*tab).next = NULL;
+		dest[i] = '\0';
+		i++;
+		n--;
 	}
-	return (tab);
+	return (dest);
 }

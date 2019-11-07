@@ -1,37 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llorgere <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/02 16:09:42 by llorgere          #+#    #+#             */
-/*   Updated: 2017/05/05 20:23:16 by llorgere         ###   ########.fr       */
+/*   Created: 2017/05/01 12:28:39 by llorgere          #+#    #+#             */
+/*   Updated: 2017/05/05 15:25:12 by llorgere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void const *content)
+int		ft_atoi(const char *str)
 {
-	t_list	*tab;
+	int		neg;
+	int		nb;
 
-	tab = NULL;
-	if (content == 0)
+	neg = 0;
+	nb = 0;
+	while (*str == '\n' || *str == '\f' || *str == '\t'
+			|| *str == '\v' || *str == '\r' || *str == ' ')
+		str++;
+	if (*str == '+')
+		str++;
+	else if (*str == '-')
 	{
-		if (!(tab = (t_list *)malloc(sizeof(*tab) * 1)))
-			return (0);
-		(*tab).content = NULL;
-//		(*tab).content_size = 0;
-		(*tab).next = NULL;
+		str++;
+		neg = 1;
 	}
-	else
+	while (*str <= '9' && *str >= '0')
 	{
-		if (!(tab = (t_list *)malloc(sizeof(*tab) * 1)))
-			return (0);
-		(*tab).content = ft_strdup(content);
-//		(*tab).content_size = content_size;
-		(*tab).next = NULL;
+		nb = nb * 10;
+		nb = nb + *str - '0';
+		str++;
 	}
-	return (tab);
+	if (neg == 1)
+		nb = nb * (-1);
+	return (nb);
 }

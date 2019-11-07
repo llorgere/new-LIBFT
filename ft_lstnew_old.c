@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void const *content)
+t_list	*ft_lstnew(void const *content, size_t content_size)
 {
 	t_list	*tab;
 
@@ -22,7 +22,7 @@ t_list	*ft_lstnew(void const *content)
 		if (!(tab = (t_list *)malloc(sizeof(*tab) * 1)))
 			return (0);
 		(*tab).content = NULL;
-//		(*tab).content_size = 0;
+		(*tab).content_size = 0;
 		(*tab).next = NULL;
 	}
 	else
@@ -30,7 +30,7 @@ t_list	*ft_lstnew(void const *content)
 		if (!(tab = (t_list *)malloc(sizeof(*tab) * 1)))
 			return (0);
 		(*tab).content = ft_strdup(content);
-//		(*tab).content_size = content_size;
+		(*tab).content_size = content_size;
 		(*tab).next = NULL;
 	}
 	return (tab);

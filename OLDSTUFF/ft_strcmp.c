@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llorgere <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/02 16:09:42 by llorgere          #+#    #+#             */
-/*   Updated: 2017/05/05 20:23:16 by llorgere         ###   ########.fr       */
+/*   Created: 2017/04/14 19:17:11 by llorgere          #+#    #+#             */
+/*   Updated: 2017/05/05 15:27:44 by llorgere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
-t_list	*ft_lstnew(void const *content)
+int		ft_strcmp(const char *s1, const char *s2)
 {
-	t_list	*tab;
+	int		i;
+	int		val;
 
-	tab = NULL;
-	if (content == 0)
-	{
-		if (!(tab = (t_list *)malloc(sizeof(*tab) * 1)))
-			return (0);
-		(*tab).content = NULL;
-//		(*tab).content_size = 0;
-		(*tab).next = NULL;
-	}
-	else
-	{
-		if (!(tab = (t_list *)malloc(sizeof(*tab) * 1)))
-			return (0);
-		(*tab).content = ft_strdup(content);
-//		(*tab).content_size = content_size;
-		(*tab).next = NULL;
-	}
-	return (tab);
+	i = 0;
+	val = -1;
+	if (s1[i] == '\0' && s2[i] == '\0')
+		return (0);
+	while (s1[i] == s2[i] && s2[i] != '\0' && s1[i] != '\0')
+		i++;
+	val = (unsigned char)s1[i] - (unsigned char)s2[i];
+	return (val);
 }

@@ -1,37 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llorgere <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/02 16:09:42 by llorgere          #+#    #+#             */
-/*   Updated: 2017/05/05 20:23:16 by llorgere         ###   ########.fr       */
+/*   Created: 2017/04/11 17:26:40 by llorgere          #+#    #+#             */
+/*   Updated: 2017/05/05 15:20:23 by llorgere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void const *content)
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	t_list	*tab;
+	unsigned char	*tsrc;
+	unsigned char	*tdest;
+	size_t			i;
 
-	tab = NULL;
-	if (content == 0)
+	i = 0;
+	tdest = (unsigned char *)dest;
+	tsrc = (unsigned char *)src;
+	if (src < dest)
 	{
-		if (!(tab = (t_list *)malloc(sizeof(*tab) * 1)))
-			return (0);
-		(*tab).content = NULL;
-//		(*tab).content_size = 0;
-		(*tab).next = NULL;
+		while (0 < n)
+		{
+			tdest[n - 1] = tsrc[n - 1];
+			n--;
+		}
 	}
 	else
 	{
-		if (!(tab = (t_list *)malloc(sizeof(*tab) * 1)))
-			return (0);
-		(*tab).content = ft_strdup(content);
-//		(*tab).content_size = content_size;
-		(*tab).next = NULL;
+		while (i < n)
+		{
+			tdest[i] = tsrc[i];
+			i++;
+		}
 	}
-	return (tab);
+	return (tdest);
 }

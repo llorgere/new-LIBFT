@@ -1,37 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_strnequ.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llorgere <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/02 16:09:42 by llorgere          #+#    #+#             */
-/*   Updated: 2017/05/05 20:23:16 by llorgere         ###   ########.fr       */
+/*   Created: 2017/05/05 15:29:00 by llorgere          #+#    #+#             */
+/*   Updated: 2017/05/05 20:13:22 by llorgere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void const *content)
+int		ft_strnequ(char const *s1, char const *s2, size_t n)
 {
-	t_list	*tab;
+	size_t	i;
 
-	tab = NULL;
-	if (content == 0)
+	if (!s1 || !s2)
+		return (0);
+	i = 0;
+	while (s1[i] != '\0' && i < n)
 	{
-		if (!(tab = (t_list *)malloc(sizeof(*tab) * 1)))
+		if (s1[i] != s2[i])
 			return (0);
-		(*tab).content = NULL;
-//		(*tab).content_size = 0;
-		(*tab).next = NULL;
+		else if (i == n - 1)
+			break ;
+		else
+			i++;
 	}
+	if (s1[i] == s2[i] || n == 0)
+		return (1);
 	else
-	{
-		if (!(tab = (t_list *)malloc(sizeof(*tab) * 1)))
-			return (0);
-		(*tab).content = ft_strdup(content);
-//		(*tab).content_size = content_size;
-		(*tab).next = NULL;
-	}
-	return (tab);
+		return (0);
 }

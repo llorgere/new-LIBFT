@@ -1,37 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llorgere <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/02 16:09:42 by llorgere          #+#    #+#             */
-/*   Updated: 2017/05/05 20:23:16 by llorgere         ###   ########.fr       */
+/*   Created: 2017/05/01 13:49:27 by llorgere          #+#    #+#             */
+/*   Updated: 2017/05/05 19:48:52 by llorgere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void const *content)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	t_list	*tab;
+	int		lens1;
+	int		lens2;
+	int		i;
+	char	*tab;
 
-	tab = NULL;
-	if (content == 0)
+	if (!s1 || !s2)
+		return (0);
+	i = 0;
+	lens1 = ft_strlen(s1);
+	lens2 = ft_strlen(s2);
+	tab = (char *)malloc(sizeof(*tab) * (lens1 + lens2 + 1));
+	if (!tab)
+		return (0);
+	while (i < lens1)
 	{
-		if (!(tab = (t_list *)malloc(sizeof(*tab) * 1)))
-			return (0);
-		(*tab).content = NULL;
-//		(*tab).content_size = 0;
-		(*tab).next = NULL;
+		tab[i] = s1[i];
+		i++;
 	}
-	else
+	while (i < lens1 + lens2)
 	{
-		if (!(tab = (t_list *)malloc(sizeof(*tab) * 1)))
-			return (0);
-		(*tab).content = ft_strdup(content);
-//		(*tab).content_size = content_size;
-		(*tab).next = NULL;
+		tab[i] = s2[i - lens1];
+		i++;
 	}
+	tab[i] = '\0';
 	return (tab);
 }

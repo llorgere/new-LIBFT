@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: llorgere <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/01 14:17:16 by llorgere          #+#    #+#             */
-/*   Updated: 2017/05/05 19:47:46 by llorgere         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "libft.h"
 
 static char	*ft_strtrim_malloc(int len, int i, char const *s)
@@ -31,20 +19,83 @@ static char	*ft_strtrim_malloc(int len, int i, char const *s)
 	return (dest);
 }
 
-char		*ft_strtrim(char const *s)
+static int	ft_end(char const *s1, char const *set, int len, int i)
+{
+	int		j;
+
+	while (len > 0)
+	{
+		j = 0;
+		while (set[j] != '\0')
+		{
+			if (set[j] == s1[i + len - 1])
+				break ;
+			j++;
+		}
+		if (set[j] == '\0')
+			break ;
+		len--;
+	}
+	return (len);
+}
+
+static int	ft_start(char const *s1, char const *set, int i)
+{
+	int		j;
+
+	while (s1[i] != '\0')
+	{
+		j = 0;
+		while (set[j] != '\0')
+		{
+			if (set[j] == s1[i])
+				break ;
+			j++;
+		}
+		if (set[j] == '\0')
+			break ;
+		i++;
+	}
+	return (i);
+}
+
+char		*ft_strtrim(char const *s1, char const *set)
 {
 	int		i;
-	int		len;
+//	int		j;
+	size_t	len;
 
-	if (!s)
-		return (0);
 	i = 0;
-	len = 0;
-	while (s[i] == '\n' || s[i] == '\t' || s[i] == ' ')
+/*	while (s1[i] != '\0')
+	{
+		j = 0;
+		while (set[j] != '\0')
+		{
+			if (set[j] == s1[i])
+				break ;
+			j++;
+		}
+		if (set[j] == '\0')
+			break ;
 		i++;
-	len = ft_strlen(s + i);
-	while ((s[i + len - 1] == '\n' || s[i + len - 1] == '\t' ||
-				s[i + len - 1] == ' ') && len > 0)
+	}
+*/
+	i = ft_start(s1, set, i);
+	len = ft_strlen(s1 + i);
+/*	while (len > 0)
+	{
+		j = 0;
+		while (set[j] != '\0')
+		{
+			if (set[j] == s1[i + len - 1])
+				break ;
+			j++;
+		}
+		if (set[j] == '\0')
+			break ;
 		len--;
-	return (ft_strtrim_malloc(len, i, s));
+	}
+	*/
+	len = ft_end(s1, set, len, i);
+	return (ft_strtrim_malloc(len, i, s1));
 }
